@@ -12,16 +12,25 @@
                     {{> "feature-image"}}
 
                     {{#if primary_author}}
-                        {{^has tag="#hide-author-overlay"}}
+                    {{^has tag="#hide-author-overlay,faq"}}
 
-                        <div class="author-overlay" data-author-url="{{primary_author.url}}" data-model-url="https://bratags.com/model/{{primary_author.slug}}">
-                            {{#if primary_author.profile_image}}
-                            <img class="author-avatar" src="{{primary_author.profile_image}}" alt="{{primary_author.name}}" title="View {{primary_author.name}}'s model profile">
-                            {{/if}}
-                            <div class="author-name" title="View {{primary_author.name}}'s bra listings page">{{primary_author.name}}</div>
-                        </div>
-
+                    <div class="author-overlay" data-author-url="{{primary_author.url}}" data-model-url="https://bratags.com/model/{{primary_author.slug}}">
+                        {{#if primary_author.profile_image}}
+                        {{#has author="Adrian"}}
+                        <img class="author-avatar" src="{{primary_author.profile_image}}" alt="{{primary_author.name}}" title="View {{primary_author.name}}'s profile">
+                        {{else}}
+                        <img class="author-avatar" src="{{primary_author.profile_image}}" alt="{{primary_author.name}}" title="View {{primary_author.name}}'s model profile">
                         {{/has}}
+                        {{/if}}
+                        {{#has author="Adrian"}}
+                        <div class="author-name" title="View {{primary_author.name}}'s posts">{{primary_author.name}}</div>
+                        {{else}}
+                        <div class="author-name" title="View {{primary_author.name}}'s bra listings page">{{primary_author.name}}</div>
+                        {{/has}}
+
+                    </div>
+
+                    {{/has}}
                     {{/if}}
                 </div>
 
@@ -52,4 +61,4 @@
     </main>
     </div>
 
-    <script src="{{asset " js/post.js"}}"></script>
+    <script src="{{asset "js/post.js"}}"></script>
