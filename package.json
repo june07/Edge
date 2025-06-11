@@ -1,6 +1,6 @@
 {
-    "name": "edge",
-    "description": "A Ghost theme",
+    "name": "edge-bratags",
+    "description": "A Bratags theme",
     "version": "1.0.0",
     "private": true,
     "engines": {
@@ -8,16 +8,16 @@
     },
     "license": "MIT",
     "author": {
-        "name": "Ghost Foundation",
-        "email": "hello@ghost.org",
-        "url": "https://ghost.org"
+        "name": "Bratags",
+        "email": "support@bratags.com",
+        "url": "https://bratags.org"
     },
     "keywords": [
         "ghost",
         "theme",
         "ghost-theme"
     ],
-    "docs": "https://edge.ghost.io/about/",
+    "docs": "https://bratags.com/about/",
     "config": {
         "posts_per_page": 10,
         "image_sizes": {

@@ -1,37 +1,54 @@
 {{!< default}}
 
-<div class="content-area">
-<main class="site-main">
+  <div class="content-area">
+    <main class="site-main">
 
-    {{#post}}
+        {{#post}}
 
-    <article class="{{post_class}} gh-article">
-        <header class="gh-article-header gh-canvas">
-            {{> "feature-image"}}
+        <article class="{{post_class}} gh-article">
+            <header class="gh-article-header gh-canvas">
 
-            <h1 class="gh-article-title">{{title}}</h1>
+                <div class="post-image-wrapper">
+                    {{> "feature-image"}}
 
-            {{#if custom_excerpt}}
+                    {{#if primary_author}}
+
+                    <div class="author-overlay" data-author-url="{{primary_author.url}}" data-model-url="https://bratags.com/model/{{primary_author.slug}}">
+                        {{#if primary_author.profile_image}}
+                        <img class="author-avatar" src="{{primary_author.profile_image}}" alt="{{primary_author.name}}" title="View {{primary_author.name}}'s model profile">
+                        {{/if}}
+                        <div class="author-name" title="View {{primary_author.name}}'s bra listings page">{{primary_author.name}}</div>
+                    </div>
+
+
+                    {{/if}}
+                </div>
+
+                <h1 class="gh-article-title">{{title}}</h1>
+
+                {{#if custom_excerpt}}
                 <div class="gh-article-excerpt">{{custom_excerpt}}</div>
-            {{/if}}
-        </header>
+                {{/if}}
+            </header>
 
-        <div class="gh-content gh-canvas">
-            {{content}}
-        </div>
-    </article>
+            <div class="gh-content gh-canvas">
+                {{content}}
+            </div>
+        </article>
 
-    {{#if comments}}
+        {{#if comments}}
         <div class="gh-comments gh-canvas">
             {{comments}}
         </div>
-    {{/if}}
+        {{/if}}
 
-    {{/post}}
+        {{/post}}
 
-    {{#if @custom.show_related_posts}}
+        {{#if @custom.show_related_posts}}
         {{> "related-posts"}}
-    {{/if}}
+        {{/if}}
 
-</main>
-</div>
+    </main>
+    </div>
+
+    <script src="{{asset "js/post.js"}}"></script>

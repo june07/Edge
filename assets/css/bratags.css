@@ -1,0 +1,40 @@
+.post-image-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.author-overlay {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    display: flex;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 0.5rem 1rem;
+    border-radius: 999px;
+    color: #fff;
+    z-index: 2;
+}
+
+.author-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 0.5rem;
+}
+
+.author-name {
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.author-overlay {
+    cursor: pointer;
+}
+
+.author-name:hover,
+.author-avatar:hover {
+    text-decoration: underline;
+    /* Optional hover effect */
+}
