@@ -48,7 +48,12 @@
     align-self: start;
     text-align: start;
 }
+
 .nav-header {
     font-size: 1rem;
     font-weight: bold;
+}
+
+.bt-nav {
+    list-style: none;
 }

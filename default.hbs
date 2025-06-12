@@ -49,34 +49,34 @@
 
                         {{#unless @member}}
                             {{#unless @site.members_invite_only}}
-                                <div class="d-flex flex-column">
+                                <ul class="d-flex flex-column bt-nav">
                                     <span class="nav-header">Models</span>
-                                    <a class="gh-head-link" href="/ghost/#/signin">Sign in</a>
-                                </div>
-                                <div class="d-flex flex-column">
+                                    <li class="nav-signin"><a class="gh-head-link" href="/ghost/#/signin">Sign in</a></li>
+                                </ul>
+                                <ul class="d-flex flex-column bt-nav">
                                     <span class="nav-header">Collectors</span>
-                                    <a class="gh-head-link" href="#/portal/signin" data-portal="signin">Sign in</a>
-                                    <a class="gh-head-link" href="#/portal/signup" data-portal="signup">Subscribe</a>
-                                </div>
+                                    <li class="nav-signin"><a class="gh-head-link" href="#/portal/signin" data-portal="signin">Sign in</a></li>
+                                    <li class="nav-subscribe"><a class="gh-head-link" href="#/portal/signup" data-portal="signup">Subscribe</a></li>
+                                </ul>
                             {{else}}
-                                <div class="d-flex flex-column">
+                                <ul class="d-flex flex-column bt-nav">
                                     <span class="nav-header">Models</span>
-                                    <a class="gh-head-link" href="/ghost/#/signin">Sign in</a>
-                                </div>
-                                <div class="d-flex flex-column">
+                                    <li class="nav-signin"><a class="gh-head-link" href="/ghost/#/signin">Sign in</a></li>
+                                </ul>
+                                <ul class="d-flex flex-column bt-nav">
                                     <span class="nav-header">Collectors</span>
-                                    <a class="gh-head-link" href="#/portal/signin" data-portal="signin">Sign in</a>
-                                </div>
+                                    <li class="nav-signin"><a class="gh-head-link" href="#/portal/signin" data-portal="signin">Sign in</a></li>
+                                </ul>
                             {{/unless}}
                         {{else}}
-                            <div class="d-flex flex-column">
+                            <ul class="d-flex flex-column bt-nav">
                                 <span class="nav-header">Models</span>
-                                <a class="gh-head-link" href="/ghost/#/signin">Sign in</a>
-                            </div>
-                            <div class="d-flex flex-column">
+                                <li class="nav-signin"><a class="gh-head-link" href="/ghost/#/signin">Sign in</a></li>
+                            </ul>
+                            <ul class="d-flex flex-column bt-nav">
                                 <span class="nav-header">Collectors</span>
-                                <a class="gh-head-link" href="#/portal/account" data-portal="signin">Account</a>
-                            </div>
+                                <li class="nav-account"><a class="gh-head-link" href="#/portal/account" data-portal="signin">Account</a></li>
+                            </ul>
                         {{/unless}}
                     </div>
                     
