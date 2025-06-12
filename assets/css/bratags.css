@@ -38,3 +38,17 @@
     text-decoration: underline;
     /* Optional hover effect */
 }
+
+.d-flex {
+    display: flex;
+}
+
+.flex-column {
+    flex-direction: column;
+    align-self: start;
+    text-align: start;
+}
+.nav-header {
+    font-size: 1rem;
+    font-weight: bold;
+}

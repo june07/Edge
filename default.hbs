@@ -45,18 +45,41 @@
                     {{/match}}
                 {{else}}
                     <button class="gh-search gh-icon-btn" aria-label="Search this site" data-ghost-search>{{> "icons/search"}}</button>
-                    <div class="gh-head-members">
+                    <div class="gh-head-members" style="height: 30px">
+
                         {{#unless @member}}
                             {{#unless @site.members_invite_only}}
-                                <a class="gh-head-link" href="#/portal/signin" data-portal="signin">Sign in</a>
-                                <a class="gh-head-btn gh-btn gh-primary-btn" href="#/portal/signup" data-portal="signup">Subscribe</a>
+                                <div class="d-flex flex-column">
+                                    <span class="nav-header">Models</span>
+                                    <a class="gh-head-link" href="/ghost/#/signin">Sign in</a>
+                                </div>
+                                <div class="d-flex flex-column">
+                                    <span class="nav-header">Collectors</span>
+                                    <a class="gh-head-link" href="#/portal/signin" data-portal="signin">Sign in</a>
+                                    <a class="gh-head-link" href="#/portal/signup" data-portal="signup">Subscribe</a>
+                                </div>
                             {{else}}
-                                <a class="gh-head-btn gh-btn gh-primary-btn" href="#/portal/signin" data-portal="signin">Sign in</a>
+                                <div class="d-flex flex-column">
+                                    <span class="nav-header">Models</span>
+                                    <a class="gh-head-link" href="/ghost/#/signin">Sign in</a>
+                                </div>
+                                <div class="d-flex flex-column">
+                                    <span class="nav-header">Collectors</span>
+                                    <a class="gh-head-link" href="#/portal/signin" data-portal="signin">Sign in</a>
+                                </div>
                             {{/unless}}
                         {{else}}
-                            <a class="gh-head-btn gh-btn gh-primary-btn" href="#/portal/account" data-portal="account">Account</a>
+                            <div class="d-flex flex-column">
+                                <span class="nav-header">Models</span>
+                                <a class="gh-head-link" href="/ghost/#/signin">Sign in</a>
+                            </div>
+                            <div class="d-flex flex-column">
+                                <span class="nav-header">Collectors</span>
+                                <a class="gh-head-link" href="#/portal/account" data-portal="signin">Account</a>
+                            </div>
                         {{/unless}}
                     </div>
+                    
                 {{/unless}}
             </div>
         </div>
