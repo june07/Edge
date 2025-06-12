@@ -1,32 +1,33 @@
 name: Build and Release Theme
 
 on:
-    workflow_dispatch: # ✅ Allow manual runs from GitHub UI
+    workflow_dispatch: # Manual trigger
     push:
         tags:
-            - 'v*' # ✅ Run on version tags like v1.2.3
+            - 'v*' # Runs on version tags like v1.2.3
 
 jobs:
     prepare-tag:
         if: github.event_name == 'workflow_dispatch'
         runs-on: ubuntu-latest
         outputs:
-            tag: ${{ steps.tag.outputs.tag }}
+            tag: ${{ steps.set_tag.outputs.version }}
         steps:
             - name: Checkout repository
               uses: actions/checkout@v4
 
             - name: Get version from package.json
-              id: get-version
-              run: echo "version=v$(node -p \"require('./package.json').version\")" >> $GITHUB_OUTPUT
+              id: set_tag
+              run: |
+                  VERSION=$(jq -r .version package.json)
+                  echo "version=v$VERSION" >> $GITHUB_OUTPUT
 
             - name: Create and push tag
-              id: tag
               run: |
                   git config user.name "github-actions[bot]"
                   git config user.email "github-actions[bot]@users.noreply.github.com"
-                  git tag ${{ steps.get-version.outputs.version }}
-                  git push origin ${{ steps.get-version.outputs.version }}
+                  git tag ${{ steps.set_tag.outputs.version }}
+                  git push origin ${{ steps.set_tag.outputs.version }}
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -39,12 +40,12 @@ jobs:
             - name: Checkout repository
               uses: actions/checkout@v4
               with:
-                  fetch-depth: 0 # Needed for tags
+                  fetch-depth: 0 # Required to get tags
 
             - name: Use Node.js
               uses: actions/setup-node@v4
               with:
-                  node-version: '18'
+                  node-version: 'lts/*'
 
             - name: Install dependencies
               run: yarn install
@@ -53,17 +54,26 @@ jobs:
               run: yarn zip
 
             - name: Get zip filename
-              id: get-zip
+              id: get_zip
               run: |
-                  NAME=$(node -p "require('./package.json').name")
-                  VERSION=$(node -p "require('./package.json').version")
+                  NAME=$(jq -r .name package.json)
+                  VERSION=$(jq -r .version package.json)
                   echo "filename=${NAME}-${VERSION}.zip" >> $GITHUB_OUTPUT
 
-            - name: Create GitHub release
+            - name: Determine tag name
+              id: get_tag
+              run: |
+                  if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+                    echo "tag=${{ needs.prepare-tag.outputs.tag }}" >> $GITHUB_OUTPUT
+                  else
+                    echo "tag=${GITHUB_REF##*/}" >> $GITHUB_OUTPUT
+                  fi
+
+            - name: Create GitHub Release
               uses: softprops/action-gh-release@v2
               with:
-                  tag_name: ${{ github.ref_name || needs.prepare-tag.outputs.tag }}
-                  name: Release ${{ github.ref_name || needs.prepare-tag.outputs.tag }}
-                  files: dist/${{ steps.get-zip.outputs.filename }}
+                  tag_name: ${{ steps.get_tag.outputs.tag }}
+                  name: Release ${{ steps.get_tag.outputs.tag }}
+                  files: dist/${{ steps.get_zip.outputs.filename }}
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
